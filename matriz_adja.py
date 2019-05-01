@@ -38,7 +38,7 @@ def ResolverProblema(g):
         print(g.d[v])
 
 def LerGrafoMontar():
-    file = open("C://Users//andre//Dropbox//UERJ//2019.1//OG//grafos.txt", "r")
+    file = open("grafos.txt", "r")
     s = file.read()
     grafo = json.loads(s)
     M = grafo['arestas']
