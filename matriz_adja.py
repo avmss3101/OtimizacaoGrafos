@@ -77,6 +77,10 @@ def main():
     v = VerticesVizinhos(k, 5)
     print('Vertices:')
     print(v)
+    AddAresta(k, 2, 3)
+    print(k)
+    RemAresta(k, 2, 3)
+    print(k)
     #CriarGrafo()
 
 main()
