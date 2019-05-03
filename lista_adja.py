@@ -64,8 +64,13 @@ def RemVertice(g, numV):
     return g
 
 def AddAresta(g, v1, v2):
-    g[v1-1].append(v2-1)
-    g[v2-1].append(v1-1)
+    qtdv = len(g)
+    for b in range(qtdv):
+        if v1 == b+1:
+            g[b].append(v2-1)
+    for b in range(qtdv):
+        if v2 == b+1:
+            g[b].append(v1-1)
     return g
 
 def main():
@@ -77,6 +82,8 @@ def main():
     l = RemVertice(l, 3)
     print(l)
     l = AddVertice(l)
+    print(l)
+    l = AddAresta(l,2,4)
     print(l)
 
 main()
