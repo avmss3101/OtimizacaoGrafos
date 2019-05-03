@@ -1,12 +1,6 @@
 #from typing import namedtuple
 import numpy, json
 
-#Nao vai ser preciso...
-class Grafo():
-    nome: []
-    vertices: []
-    arestas: []
-
 #GrafoMatriz
 class MatrizAdjacencia():
     n: int
@@ -55,8 +49,9 @@ def LerGrafoMontar():
                 v2 = int(M[l][c])
                 m_adj[v1 - 1][v2 - 1] = 1
                 m_adj[v2 - 1][v1 - 1] = 1
-    return m_adj
-    #print(m_adj)
+    #return m_adj
+    m_adj = AddVertice(m_adj)
+    print(m_adj)
 
 def QtdArestas(m_adj):
     qtd = 0
@@ -68,8 +63,13 @@ def QtdArestas(m_adj):
 # QtdVertices = len(m_adj)
 
 def AddVertice(g):
-    g.resize((len(g) + 1, len(g) + 1))
-    return g
+    #g.resize((len(g) + 1, 1), refcheck=False)
+    z = numpy.zeros((len(g)+1,len(g)+1))
+    z[:-1,:-1] = g
+    #zl = numpy.zeros((len(g), len(g)))
+        #g[0][i] = 0
+        #g[len(g)-1][i] = 0
+    return z
 
 def RemVertice(g, numV):
     g = numpy.delete(g, (numV - 1), axis = 0)
