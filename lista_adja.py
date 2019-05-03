@@ -12,28 +12,30 @@ import numpy, json, random, pickle
 #    def setProximo(self, proximo):
 #        self.proximo = proximo
 
-class PythonObjectEncoder(JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, (list, dict, str, unicode, int, float, bool, type(None))):
-            return JSONEncoder.default(self, obj)
-        return {'_python_object': pickle.dumps(obj)}
 
 def CriarGrafo():
     grafos12 = [5,6,7,8,9,10,20,50,100,200,500,1000]    #numeros de vertices
-    gr = {}
-    gr['nome'] = {'grafo1'}
-    for i in range(5):
-        gr.update({'vertices':str(i)})
-    num = random.randint(1,5)
-    for i in range(num):
-        x = random.randint(1,5)
-        y = random.randint(1,5)
-        if x != y:
-            gr.update({'arestas':[x, y]})
-    dict.fromkeys(gr)
-    s = json.dumps(gr, cls=PythonObjectEncoder)
-    with open("book.txt", "w") as f:
-        f.write(s)
+    for j in range(12):
+        gr = {}
+        gr['nome'] = []
+        gr['vertices'] = []
+        gr['arestas'] = []
+        gr['nome'].append('grafo1')
+        for i in range(grafos12[j]):
+            gr['vertices'].append(str(i))
+            #gr.update({'vertices':str(i)})
+        num = random.randint(1,grafos12[j])
+        for i in range(num):
+            x = random.randint(1,grafos12[j])
+            y = random.randint(1,grafos12[j])
+            if x != y:
+                gr['arestas'].append([x,y])
+                #gr.update({'arestas':[x, y]})
+        #dict.fromkeys(gr)
+        s = json.dumps(gr)
+        palavra = 'grafo' + str(grafos12[j]) + '.txt'
+        with open(palavra, "w") as f:
+            f.write(s)
     
 class NoAresta:
     #Viz: int
@@ -48,7 +50,7 @@ class Grafo():
     L: []
 
 def LerGrafoMontar():
-    file = open("grafos.txt", "r")
+    file = open("grafo10.txt", "r")
     s = file.read()
     grafo = json.loads(s)
     MA = grafo['arestas']
