@@ -32,7 +32,7 @@ def ResolverProblema(g):
         print(g.d[v])
 
 def LerGrafoMontar():
-    file = open("grafos.txt", "r")
+    file = open("grafo10.txt", "r")
     s = file.read()
     grafo = json.loads(s)
     M = grafo['arestas']

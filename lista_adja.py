@@ -1,4 +1,4 @@
-import numpy, json, random, pickle
+import numpy, json, random
 
 #class ListaAdjacencia:
 #    valor = None
@@ -13,7 +13,7 @@ import numpy, json, random, pickle
 #        self.proximo = proximo
 
 
-def CriarGrafo():
+def CriarGrafo():#gera arquivos txt em json
     grafos12 = [5,6,7,8,9,10,20,50,100,200,500,1000]    #numeros de vertices
     for j in range(12):
         gr = {}
