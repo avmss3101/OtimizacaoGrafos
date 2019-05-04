@@ -8,7 +8,7 @@ class Grafo():
     M: []
 
 def LerGrafoMontar():
-    file = open("grafo20.txt", "r")
+    file = open("grafo5.txt", "r")
     s = file.read()
     grafo = json.loads(s)
     M = grafo['arestas']

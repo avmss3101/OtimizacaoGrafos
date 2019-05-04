@@ -23,7 +23,7 @@ def CriarGrafo():#gera arquivos txt no formato json
             f.write(s)
     
 def LerGrafoMontar():
-    file = open("grafo10.txt", "r")
+    file = open("grafo5.txt", "r")
     s = file.read()
     grafo = json.loads(s)
     MA = grafo['arestas']
@@ -48,6 +48,8 @@ def AddVertice(g):
     return g
 
 def RemVertice(g, numV):
+    for i in range(len(g[numV-1])):#exclui as dependencias de arestas em outros vertices
+        g = RemAresta(g,g[numV-1][0],numV)#sempre estarei excluindo o primeiro conforme for excluindo...
     del g[numV-1]
     return g
 

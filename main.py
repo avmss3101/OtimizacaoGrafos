@@ -1,6 +1,6 @@
 #from lista_adja import *
 #from matriz_adja import *
-import random, json, lista_adja
+import random, json, lista_adja, matriz_adja
 
 def CriarGrafo():#gera arquivos txt no formato json
     grafos12 = [5,6,7,8,9,10,20,50,100,200,500,1000]    #numeros de vertices
@@ -38,17 +38,44 @@ def CriarGrafo():#gera arquivos txt no formato json
 
 def main():
     #CriarGrafo()
+    print('TESTES LISTA ADJACENCIA')
     l = lista_adja.LerGrafoMontar()
     print(l)
     print('')
     l = lista_adja.AddVertice(l)
     print(l)
     print('')
-    l = lista_adja.RemVertice(l,7)
+    l = lista_adja.RemVertice(l,4)
     print(l)
     print('')
-    l = lista_adja.AddAresta(l, 9, 7)
+    l = lista_adja.AddAresta(l, 2, 3)
     print(l)
+    print('')
+    l = lista_adja.RemAresta(l,2,1)
+    print(l)
+    print('')
+    v = lista_adja.VerticesVizinhos(l, 3)
+    print(v)
+    print('')
+    ####
+    print('TESTES MATRIZ ADJACENCIA')
+    m = matriz_adja.LerGrafoMontar()
+    print(m)
+    print('')
+    m = matriz_adja.AddVertice(m)
+    print(m)
+    print('')
+    m = matriz_adja.RemVertice(m,4)
+    print(m)
+    print('')
+    m = matriz_adja.AddAresta(m, 2, 3)
+    print(m)
+    print('')
+    m = matriz_adja.RemAresta(m,2,1)
+    print(m)
+    print('')
+    vm = matriz_adja.VerticesVizinhos(m, 3)
+    print(vm)
     print('')
 
 main()
