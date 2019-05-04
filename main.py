@@ -1,5 +1,3 @@
-#from lista_adja import *
-#from matriz_adja import *
 import random, json, lista_adja, matriz_adja
 
 def CriarGrafo():#gera arquivos txt no formato json
@@ -19,18 +17,11 @@ def CriarGrafo():#gera arquivos txt no formato json
             y = str(random.randint(1,grafos12[j]))
             if x != y:#evitar laco
                 arestatem = False
-                #print('olha eu aqui')
                 for k in range(len(gr['arestas'])):#evitar que incida a mesma aresta
-                    #print('olha eu aqui 2')
                     if ((gr['arestas'][k][0] == x and gr['arestas'][k][1] == y) or (gr['arestas'][k][0] == y and gr['arestas'][k][1] == x)):
-                        #print('olha eu aqui 3: ' + str(k) + '.........')
                         arestatem = True
                 if not arestatem:
                     gr['arestas'].append([x,y])
-
-                        #if addagora:
-                        #    gr['arestas'].append([x,y])
-                        #    addagora = False
         s = json.dumps(gr)
         palavra = 'grafo' + str(grafos12[j]) + '.txt'
         with open(palavra, "w") as f:
@@ -42,6 +33,7 @@ def main():
     l = lista_adja.LerGrafoMontar()
     print(l)
     print('')
+    print('Adiciona Vertice em grafo [representacao lista]')
     l = lista_adja.AddVertice(l)
     print(l)
     print('')
@@ -51,7 +43,7 @@ def main():
     l = lista_adja.AddAresta(l, 2, 3)
     print(l)
     print('')
-    l = lista_adja.RemAresta(l,2,1)
+    l = lista_adja.RemAresta(l,2,3)
     print(l)
     print('')
     v = lista_adja.VerticesVizinhos(l, 3)
@@ -71,7 +63,7 @@ def main():
     m = matriz_adja.AddAresta(m, 2, 3)
     print(m)
     print('')
-    m = matriz_adja.RemAresta(m,2,1)
+    m = matriz_adja.RemAresta(m,1,815)
     print(m)
     print('')
     vm = matriz_adja.VerticesVizinhos(m, 3)

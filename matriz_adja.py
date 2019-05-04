@@ -1,14 +1,7 @@
 import numpy, json
-#from lista_adja import CriarGrafo
-
-#GrafoMatriz
-class Grafo():
-    n: int
-    m: int
-    M: []
 
 def LerGrafoMontar():
-    file = open("grafo5.txt", "r")
+    file = open("grafo1000.txt", "r")
     s = file.read()
     grafo = json.loads(s)
     M = grafo['arestas']
@@ -36,7 +29,6 @@ def QtdArestas(m_adj):
 # QtdVertices = len(m_adj)
 
 def AddVertice(g):
-    #g.resize((len(g) + 1, 1), refcheck=False)
     z = numpy.zeros((len(g)+1,len(g)+1))
     z[:-1,:-1] = g
     return z
@@ -64,23 +56,3 @@ def VerticesVizinhos(g, v):
             vertices.append(x + 1)
             #y = y + 1
     return vertices
-
-def main():
-    k = LerGrafoMontar()
-    print('Grafo Montado')
-    print(k)
-    print('')
-    k = AddVertice(k)
-    print(k)
-    k = RemVertice(k, 4)
-    print(k)
-    v = VerticesVizinhos(k, 5)
-    print('Vertices:')
-    print(v)
-    AddAresta(k, 2, 3)
-    print(k)
-    RemAresta(k, 2, 3)
-    print(k)
-    #CriarGrafo()
-
-#main()
