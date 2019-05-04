@@ -7,10 +7,11 @@ def CriarGrafo():#gera arquivos txt no formato json
         gr['nome'] = []
         gr['vertices'] = []
         gr['arestas'] = []
+        nome = 'grafo_' + str(j+1)
         gr['nome'].append('grafo1')
         for i in range(grafos12[j]):
             gr['vertices'].append(str(i))
-        num = random.randint(1,grafos12[j]*5)
+        num = random.randint(1,grafos12[j]*8)
         for i in range(num):
             x = random.randint(1,grafos12[j])
             y = random.randint(1,grafos12[j])
@@ -38,8 +39,8 @@ def LerGrafoMontar():
                 v1 = int(MA[l][c])
             if c == 1:
                 v2 = int(MA[l][c])
-                l_adj[v1-1].append(v2-1)
-                l_adj[v2-1].append(v1-1)
+                l_adj[v1-1].append(v2)
+                l_adj[v2-1].append(v1)
     return l_adj
 
 def AddVertice(g):
@@ -51,13 +52,19 @@ def RemVertice(g, numV):
     return g
 
 def AddAresta(g, v1, v2):
-    g[v1-1].append(v2-1)
-    g[v2-1].append(v1-1)
+    tamV = len(g[v1])
+    verifica = False
+    for i in range(tamV):
+        if g[v1-1][i] == v2:
+           verifica = True
+    if not verifica:
+        g[v1-1].append(v2)
+        g[v2-1].append(v1)
     return g
 
 def RemAresta(g, v1, v2):
-    g[v1-1].remove(v2-1)
-    g[v2-1].remove(v1-1)
+    g[v1-1].remove(v2)
+    g[v2-1].remove(v1)
     return g
 
 def VerticesVizinhos(g, v):
@@ -83,4 +90,4 @@ def main():
     print(vertice)
     CriarGrafo()
 
-main()
+#main()

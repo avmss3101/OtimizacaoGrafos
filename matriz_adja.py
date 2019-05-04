@@ -83,4 +83,4 @@ def main():
     print(k)
     #CriarGrafo()
 
-main()
+#main()
