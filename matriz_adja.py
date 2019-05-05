@@ -1,11 +1,13 @@
 import numpy, json
 
-def LerGrafoMontar():
-    file = open('grafo1000.txt', 'r')
+def LerGrafoMontar(numV):
+    grafo_nome = 'grafo' + numV +'.txt'
+    file = open(grafo_nome, 'r')
     s = file.read()
     grafo = json.loads(s)
     M = grafo['arestas']
     V = grafo['vertices']
+
     m_adj = numpy.zeros((len(V), len(V)))
     for l in range(len(M)):
         v1 = 0
@@ -34,6 +36,13 @@ def AddVertice(g):
     return z
 
 def RemVertice(g, numV):
+    #fiquei na duvida aqui
+    #irei remover o vertice mas o novo grafo seria apenas isomorfo e nao identico...
+    #Exemplo = V = {1,2,3}, E = {{1,2},{2,3}}
+    #Excluir v = 2
+    #O certo seria: V = {1,3}, E = {}
+    #Mas nessa representacao ficaria: V = {1,2}, E = {}
+    #Pois acredito que adicionar -1 na linha e colunca da matriz para manter o numero do indice representando o vertice real seria errado...
     g = numpy.delete(g, (numV - 1), axis = 0)
     g = numpy.delete(g, (numV - 1), axis = 1)
     return g
