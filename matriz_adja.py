@@ -1,7 +1,7 @@
 import numpy, json
 
 def LerGrafoMontar():
-    file = open("grafo1000.txt", "r")
+    file = open('grafo1000.txt', 'r')
     s = file.read()
     grafo = json.loads(s)
     M = grafo['arestas']
