@@ -17,8 +17,8 @@ def LerGrafoMontar(numV):
                 v1 = int(M[l][c])
             if c == 1:
                 v2 = int(M[l][c])
-                m_adj[v1 - 1][v2 - 1] = 1
-                m_adj[v2 - 1][v1 - 1] = 1
+                m_adj[v1][v2] = 1
+                m_adj[v2][v1] = 1
     return m_adj
 
 def QtdArestas(m_adj):

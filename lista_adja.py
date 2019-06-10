@@ -10,7 +10,7 @@ def LerGrafoMontar(numV):
 
     l_adj = [[] for i in range(len(V))]
     for i in range(len(l_adj)):
-        l_adj[i].append(i+1)#o seu primeiro elemento sera o indicador do vertice, nao o seu indice
+        l_adj[i].append(i)#o seu primeiro elemento sera o indicador do vertice, nao o seu indice
     for l in range(len(MA)):
         v1 = 0
         v2 = 0
@@ -19,11 +19,18 @@ def LerGrafoMontar(numV):
                 v1 = int(MA[l][c])
             if c == 1:
                 v2 = int(MA[l][c])
-                l_adj[v1-1].append(v2)
-                l_adj[v2-1].append(v1)
+                l_adj[v1].append(v2)
+                l_adj[v2].append(v1)
     #for i in range(len(l_adj)):
     #    l_adj[i] = i + 1
     return l_adj
+
+def QtdArestas(g):
+    soma = 0
+    for l in range(len(g)):
+        for c in range(len(g[l]) -1):
+            soma = soma + 1
+    return int(soma/2)
 
 def AddVertice(g):
     tam = len(g)+1
@@ -32,6 +39,7 @@ def AddVertice(g):
     return g
 
 def RemVertice(g, numV):
+    v = 0#???
     for i in range(len(g)):#exclui as dependencias de arestas em outros vertices
         if g[i][0] == numV:
             v = i
