@@ -29,7 +29,7 @@ def CriarGrafo():#gera arquivos txt no formato json
 
 def main():
     #CriarGrafo()
-    gr = "5"
+    gr = "6"
     g = lista_adja.LerGrafoMontar(gr)
     
     visitado, explorada, descoberta = buscas.busca_rot(g)
@@ -68,5 +68,11 @@ def main():
     print(buscas.EhArvore_l_1(g))
     print('Eh Arvore_2?')
     print(buscas.EhArvore_l_2(g))
+    print('Grafo normal:')
+    print(g)
+    print('Floresta Geradora:')
+    t = buscas.ObterFlorestaGeradora_l(g)
+    print(t)
+    buscas.BuscaProfundidade_l(g, 0)
 
 main()

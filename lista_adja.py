@@ -33,9 +33,9 @@ def QtdArestas(g):
     return int(soma/2)
 
 def AddVertice(g):
-    tam = len(g)+1
+    tam = len(g)
     g.append([]);#p q nao direto? erro...
-    g[tam-1].append(tam)
+    g[tam].append(tam)
     return g
 
 def RemVertice(g, numV):
