@@ -1,4 +1,4 @@
-import random, json, lista_adja, matriz_adja, buscas
+import random, json, lista_adja, matriz_adja, buscas_l
 
 def CriarGrafo():#gera arquivos txt no formato json
     grafos12 = [5,6,7,8,9,10,20,50,100,200,500,1000]    #numeros de vertices
@@ -29,50 +29,27 @@ def CriarGrafo():#gera arquivos txt no formato json
 
 def main():
     #CriarGrafo()
-    gr = "6"
+    gr = "5"
     g = lista_adja.LerGrafoMontar(gr)
     
-    visitado, explorada, descoberta = buscas.busca_rot(g)
-    
-    #print(visitado)
-    #print(explorada)
-    #print(descoberta)
-    
-    #r = g[0][0]#raiz o primeiro vertice
-    r = 0
-    
-    #buscas.busca_slide5_l(g, visitado, explorada, descoberta, r)
-    
-    #qtd_e = lista_adja.QtdArestas(g)
-    #print(qtd_e)
-    #g = lista_adja.RemVertice(g,"3")
-    #print(g)
-    
-    #buscas.busca_completa_slide6_l(g)
-    #g, visitado, explorada, descoberta = buscas.busca_slide5_l(g, visitado, explorada, descoberta, r)
-    #print('só aí')
-    #print(visitado)
-    #print()
-    #print(explorada)
-    #print()
-    #print(descoberta)
-
     print(gr)
     print('Eh conexo?')
-    print(buscas.EhConexo_l(g))
+    print(buscas_l.EhConexo(g))
     print('Tem Ciclo?')
-    print(buscas.TemCiclo_l(g))
+    print(buscas_l.TemCiclo(g))
     print('Tem Floresta?')
-    print(buscas.EhFloresta_l(g))
+    print(buscas_l.EhFloresta(g))
     print('Eh Arvore_1?')
-    print(buscas.EhArvore_l_1(g))
+    print(buscas_l.EhArvore_1(g))
     print('Eh Arvore_2?')
-    print(buscas.EhArvore_l_2(g))
-    print('Grafo normal:')
-    print(g)
-    print('Floresta Geradora:')
-    t = buscas.ObterFlorestaGeradora_l(g)
-    print(t)
-    buscas.BuscaProfundidade_l(g, 0)
+    print(buscas_l.EhArvore_2(g))
+    #print('Grafo normal:')
+    #print(g)
+    #print('Floresta Geradora:')
+    #t = buscas_l.ObterFlorestaGeradora(g)
+    #print(t)
+    #buscas_l.BuscaProfundidade(g, 0)
+    #print('BuscaProfundidade com Recursividade')
+    #buscas_l.BuscaProfundidade_r(g, v)
 
 main()

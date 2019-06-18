@@ -9,8 +9,8 @@ def LerGrafoMontar(numV):
     V = grafo['vertices']
 
     l_adj = [[] for i in range(len(V))]
-    for i in range(len(l_adj)):
-        l_adj[i].append(i)#o seu primeiro elemento sera o indicador do vertice, nao o seu indice
+    #for i in range(len(l_adj)):
+    #    l_adj[i].append(i)#o seu primeiro elemento sera o indicador do vertice, nao o seu indice
     for l in range(len(MA)):
         v1 = 0
         v2 = 0
@@ -28,7 +28,7 @@ def LerGrafoMontar(numV):
 def QtdArestas(g):
     soma = 0
     for l in range(len(g)):
-        for c in range(len(g[l]) -1):
+        for c in range(len(g[l])):#tirei o menos depois da mudanca real-isomorfo
             soma = soma + 1
     return int(soma/2)
 
@@ -39,35 +39,42 @@ def AddVertice(g):
     return g
 
 def RemVertice(g, numV):
-    v = 0#???
-    for i in range(len(g)):#exclui as dependencias de arestas em outros vertices
-        if g[i][0] == numV:
-            v = i
-            for j in range(1,len(g[i])):
-                g = RemAresta(g,g[i][1],numV)#tem q comecar do 1. sempre estarei excluindo o primeiro conforme for excluindo...
-    del g[v]
+    ####MUDANCA##### com a mudanca de real p/ isomorfo
+    #v = 0#???
+    #for i in range(len(g)):#exclui as dependencias de arestas em outros vertices
+        #if g[i][0] == numV:
+            #v = i
+    for j in range(len(g[numV])):
+        g = RemAresta(g,g[numV][0],numV)#tem q comecar do 1. sempre estarei excluindo o primeiro conforme for excluindo...
+    for i in range (len(g)):#AGORA ele sera isomorfo, o que mantem suas propriedades, mas nao eh o real...
+        for j in range (len(g[i])):
+            if (g[i][j] > numV):
+                g[i][j] = g[i][j] - 1
+    del g[numV]
     #considerei que nessa representacao seria melhor usar a primeira casa do vetor como o numero do vertice ao inves do indice
     #fiquei nessa duvida, pois teria que varrer a matriz para subtrair os vertices acima do vertice removido para manter a integridade do grafo
     return g
 
 def AddAresta(g, v1, v2):
-    for i in range(len(g)):
-        if g[i][0] == v1:
-            g[i].append(v2)
-        if g[i][0] == v2:
-            g[i].append(v1)
+    #for i in range(len(g)):
+    #    if g[i][0] == v1:
+    g[v1].append(v2)
+    #    if g[i][0] == v2:
+    g[v2].append(v1)
     return g
 
 def RemAresta(g, v1, v2):
-    for i in range(len(g)):
-        if g[i][0] == v1:
-            g[i].remove(v2)
-        if g[i][0] == v2:
-            g[i].remove(v1)
+    #for i in range(len(g[v1])):
+    #    if (g[v1][i] == v2):
+    g[v1].remove(v2)
+    #for i in range (len(g[v2])):
+    #    if (g[v2][i] == v1):
+    g[v2].remove(v1)
     return g
 
 def VerticesVizinhos(g, v):
-    for i in range(len(g)):
-        if g[i][0] == v:
-            g[i].remove(v)
-            return g[i]
+    return g[v]
+    #for i in range(len(g)):
+    #    if g[i][0] == v:
+    #        g[i].remove(v)
+    #        return g[i]
