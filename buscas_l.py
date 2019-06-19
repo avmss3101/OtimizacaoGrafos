@@ -184,16 +184,11 @@ def BuscaProfundidade(g, v):#slide 26
     p = []
     priv = -1#inicia como -1, pois se nao tiver primeiroviz ficara com tal valor ja que na minha implementacao 0 pode ser vertice
     vis, e, d = busca_rot(g)
-    #for i in range(len(g)):
-    #    if (g[i][0] == v):
     print('vis')
     print(vis)
     vis[v] = True
     print('vis')
     print(vis)
-            #aproveitar esse for para achar PrimeiroViz
-            #if (len(g[i]) > 1):
-            #    priv = g[i][1]
     priv = PrimeiroViz(g, v)
     #empilha
     p.append(v)
@@ -208,20 +203,15 @@ def BuscaProfundidade(g, v):#slide 26
             print(vis)
             p.append(v)
             p.append(ProximoViz(g, v, w))
-            #for i in range(len(vis)):
             if (vis[w]):#errado, eh o w
                     for j in range(len(e)):
-                        #for k in range(2):
-                        if (((e[j][0] == v and e[j][1] == w) or (e[j][1] == v and e[j][0] == w)) and not e[j][2]):
+                        if ((e[j][0] == v and e[j][1] == w and not e[j][2]) or (e[j][1] == v and e[j][0] == w and not e[j][2])):
                             e[j][2] = True
-            if (vis[w] == False):
+            else:#if (vis[w] == False):
                     for j in range(len(e)):
-                        #for k in range(2):
-                        if (((e[j][0] == v and e[j][1] == w) or (e[j][1] == v and e[j][0] == w)) and not e[j][2]):
+                        if ((e[j][0] == v and e[j][1] == w and not e[j][2]) or (e[j][1] == v and e[j][0] == w and not e[j][2])):
                             e[j][2] = True
                             d[j][2] = True
-                                 #for l in range(len(vis)):
-                                    #if (vis[l][0] == w):
                             vis[w] = True
                             p.append(w)
                             p.append(PrimeiroViz(g, w))
@@ -237,15 +227,12 @@ def BuscaProfundidade(g, v):#slide 26
 
 ##SERA PRECISO USAR O BUSCA_ROT ANTES##
 def BuscaProfundidade_r(g, v, vis, e, d):#slide 27
-    ##vis, e, d = busca_rot(g)
-    #for i in range(len(g)):
-        #if (g[i][0] == v):
     vis[v] = True
-    for i in range(len(vis)):#i, eh o w
+    for i in range(v, len(vis)):#i, eh o w
         if (vis[i]):
             for j in range(len(e)):
                 if ((e[j][0] == i and e[j][2] == False) or (e[j][1] == i and e[j][2] == False)):#if ((e[j][0] == i and e[j][1] == v and e[j][2] == False) or (e[j][1] == i and e[j][0] == v and e[j][2] == False)):
-                    e[j][2] = True
+                    e[j][2] = True  
         else:
             for j in range(len(e)):
                 if ((e[j][0] == i) or (e[j][1] == i)):
@@ -260,3 +247,5 @@ def BuscaProfundidade_r(g, v, vis, e, d):#slide 27
     print(e)
     print()
     print(d)
+
+def BuscaLargura(g, v):
