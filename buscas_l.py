@@ -164,9 +164,9 @@ def ObterFlorestaGeradora(g):#slide 17
 
 def PrimeiroViz(g, v):#funcao auxiliar para slide 26
     priv = -1
-    for i in range(len(g)):
-        if (len(g[i]) > 0):##()and (g[i][0] == v
-            priv = g[i][0]
+    #for i in range(len(g)):
+    if (len(g[v]) > 0):##()and (g[i][0] == v
+        priv = g[v][0]
     return priv
 
 
@@ -176,8 +176,8 @@ def ProximoViz(g, v, w):#funcao auxiliar para slide 26
         #if (g[i][0] == v):
     for j in range(len(g[v])):
                #if (j < len(g[i]) -2):#-1?
-        if (g[v][j] != w):#DUVIDA
-            prov = g[v][j]
+        if ((g[v][j] == w) and (len(g[v]) -1 > j)):#DUVIDA
+            prov = g[v][j+1]
     return prov
 
 def BuscaProfundidade(g, v):#slide 26
@@ -211,20 +211,20 @@ def BuscaProfundidade(g, v):#slide 26
             #for i in range(len(vis)):
             if (vis[w]):#errado, eh o w
                     for j in range(len(e)):
-                        for k in range(2):
-                            if (((e[j][0] == v and e[j][1] == w) or (e[j][1] == v and e[j][0] == w)) and not e[j][2]):
-                                 e[j][2] = True
+                        #for k in range(2):
+                        if (((e[j][0] == v and e[j][1] == w) or (e[j][1] == v and e[j][0] == w)) and not e[j][2]):
+                            e[j][2] = True
             if (vis[w] == False):
                     for j in range(len(e)):
-                        for k in range(2):
-                            if (((e[j][0] == v and e[j][1] == w) or (e[j][1] == v and e[j][0] == w)) and not e[j][2]):
-                                 e[j][2] = True
-                                 d[j][2] = True
+                        #for k in range(2):
+                        if (((e[j][0] == v and e[j][1] == w) or (e[j][1] == v and e[j][0] == w)) and not e[j][2]):
+                            e[j][2] = True
+                            d[j][2] = True
                                  #for l in range(len(vis)):
                                     #if (vis[l][0] == w):
-                                 vis[w] = True
-                                 p.append(w)
-                                 p.append(PrimeiroViz(g, w))
+                            vis[w] = True
+                            p.append(w)
+                            p.append(PrimeiroViz(g, w))
         tam_p = len(p)
     print('BuscaProfundidade')
     print('Grafo')
@@ -235,22 +235,23 @@ def BuscaProfundidade(g, v):#slide 26
     print()
     print(d)
 
-def BuscaProfundidade_r(g, v):#slide 27
-    vis, e, d = busca_rot(g)
+##SERA PRECISO USAR O BUSCA_ROT ANTES##
+def BuscaProfundidade_r(g, v, vis, e, d):#slide 27
+    ##vis, e, d = busca_rot(g)
     #for i in range(len(g)):
         #if (g[i][0] == v):
     vis[v] = True
     for i in range(len(vis)):#i, eh o w
         if (vis[i]):
             for j in range(len(e)):
-                if ((e[j][0] == i and e[j][1] == v and e[j][2] == False) or (e[j][1] == i and e[j][0] == v and e[j][2] == False)):
+                if ((e[j][0] == i and e[j][2] == False) or (e[j][1] == i and e[j][2] == False)):#if ((e[j][0] == i and e[j][1] == v and e[j][2] == False) or (e[j][1] == i and e[j][0] == v and e[j][2] == False)):
                     e[j][2] = True
         else:
             for j in range(len(e)):
-                if ((e[j][0] == i and e[j][1] == v) or (e[j][1] == i and e[j][0] == v)):
+                if ((e[j][0] == i) or (e[j][1] == i)):
                     e[j][2] = True
                     d[j][2] = True
-                    BuscaProfundidade_r(g, i)
+                    BuscaProfundidade_r(g, i, vis, e, d)
     #print('BuscaProfundidade')
     print('Grafo')
     print(g)
