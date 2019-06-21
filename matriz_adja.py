@@ -27,7 +27,7 @@ def QtdArestas(m_adj):
         for c in range(len(m_adj[0])):
             if m_adj[l][c] == 1:
                 qtd = qtd + 1
-    return qtd/2
+    return int(qtd/2)
 # QtdVertices = len(m_adj)
 
 def AddVertice(g):
