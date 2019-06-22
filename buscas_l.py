@@ -57,7 +57,7 @@ def busca_rot(g):
     #print(descoberta)
     return visitado, explorada, descoberta
 
-def busca(g, v, e, d, r):#slide 5
+def busca(v, e, d, r):#slide 5
     #v, e, d = busca_rot(g)
     #r = v[0][0]
     #for i in range(len(v)):
@@ -85,12 +85,12 @@ def busca(g, v, e, d, r):#slide 5
         i += 1
     return v, e, d#tirei o g
 
-def busca_completa(g, v, e, d):#slide 6
+def busca_completa(v, e, d):#slide 6
     #v, e, d = busca_rot(g)
 
     for r in range(len(v)):
         if (v[r] == False):
-            v, e, d = busca(g, v, e, d, r)
+            v, e, d = busca(v, e, d, r)
     #print(v)
     #print()
     #print(e)
@@ -98,7 +98,7 @@ def busca_completa(g, v, e, d):#slide 6
     #print(d)
     return v, d
 
-def EhConexo(g, v, e, d):#slide 9
+def EhConexo(v, e, d):#slide 9
     #v, e, d = busca_rot(g)
     #print('v')
     #print(v)
@@ -107,7 +107,7 @@ def EhConexo(g, v, e, d):#slide 9
     #print('d')
     #print(d)
     r = 0#g[0][0]
-    v, e, d = busca(g, v, e, d, r)
+    v, e, d = busca(v, e, d, r)
     #print('v_d')
     #print(v)
     #print('e_d')
@@ -119,8 +119,8 @@ def EhConexo(g, v, e, d):#slide 9
             return False
     return True
 
-def TemCiclo(g, v, e, d):#slide 10
-    v, d = busca_completa(g, v, e, d)
+def TemCiclo(v, e, d):#slide 10
+    v, d = busca_completa(v, e, d)
     #print('d')
     #print(d)
     for i in range(len(d)):
@@ -128,13 +128,13 @@ def TemCiclo(g, v, e, d):#slide 10
             return True
     return False
 
-def EhFloresta(g, v, e, d):#slide 11
-    return not TemCiclo(g, v, e, d)
+def EhFloresta(v, e, d):#slide 11
+    return not TemCiclo(v, e, d)
 
-def EhArvore_1(g, v, e, d):#slide 12
+def EhArvore_1(v, e, d):#slide 12
     #v, e, d = busca_rot(g)
     r = 0#g[0][0]
-    v, e, d = busca(g, v, e, d, r)
+    v, e, d = busca(v, e, d, r)
     for i in range(len(v)):
         if (not v[i]):
             return False
@@ -143,13 +143,13 @@ def EhArvore_1(g, v, e, d):#slide 12
             return False
     return True
 
-def EhArvore_2(g, v, e, d):#slide 13
-    return EhConexo(g, v, e, d) and not TemCiclo(g, v, e, d)
+def EhArvore_2(v, e, d):#slide 13
+    return EhConexo(v, e, d) and not TemCiclo(v, e, d)
 
-def ObterFlorestaGeradora(g, v, e, d):#slide 17
-    v, d = busca_completa(g, v, e, d)
+def ObterFlorestaGeradora(v, e, d):#slide 17
+    v, d = busca_completa(v, e, d)
     r = 0#g[0][0]
-    t = [[] for i in range(len(g))]
+    t = [[] for i in range(len(v))]
 
     #add_vertice ou isso:
     #for i in range(len(g)):
@@ -184,12 +184,14 @@ def BuscaProfundidade(g, v, vis, e, d):#slide 26
     p = []#pilha
     priv = -1#inicia como -1, pois se nao tiver primeiroviz ficara com tal valor ja que na minha implementacao 0 pode ser vertice
     #vis, e, d = busca_rot(g)
-    print('vis')
-    print(vis)
+    
+    #print('vis')
+    #print(vis)
     vis[v] = True
-    print('vis')
-    print(vis)
+    #print('vis')
+    #print(vis)
     priv = PrimeiroViz(g, v)
+    
     #empilha
     p.append(v)
     p.append(priv)
@@ -199,8 +201,8 @@ def BuscaProfundidade(g, v, vis, e, d):#slide 26
         w = p.pop()
         v = p.pop()
         if (w > -1):
-            print('vis')
-            print(vis)
+            #print('vis')
+            #print(vis)
             p.append(v)
             p.append(ProximoViz(g, v, w))
             if (vis[w]):#errado, eh o w
@@ -216,17 +218,17 @@ def BuscaProfundidade(g, v, vis, e, d):#slide 26
                             p.append(w)
                             p.append(PrimeiroViz(g, w))
         tam_p = len(p)
-    print('BuscaProfundidade')
-    print('Grafo')
-    print(g)
-    print(vis)
-    print()
-    print(e)
-    print()
-    print(d)
+    #print('BuscaProfundidade')
+    #print('Grafo')
+    #print(g)
+    #print(vis)
+    #print()
+    #print(e)
+    #print()
+    #print(d)
 
 ##SERA PRECISO USAR O BUSCA_ROT ANTES##
-def BuscaProfundidade_r(g, v, vis, e, d):#slide 27
+def BuscaProfundidade_r(v, vis, e, d):#slide 27
     vis[v] = True
     for i in range(v, len(vis)):#i, eh o w
         if (vis[i]):
@@ -238,17 +240,15 @@ def BuscaProfundidade_r(g, v, vis, e, d):#slide 27
                 if ((e[j][0] == i and e[j][1] == v) or (e[j][1] == i and e[j][0] == v)):
                     e[j][2] = True
                     d[j][2] = True
-                    BuscaProfundidade_r(g, i, vis, e, d)
+                    BuscaProfundidade_r(i, vis, e, d)
     #print('BuscaProfundidade')
-    print('Grafo')
-    print(g)
-    print(vis)
-    print()
-    print(e)
-    print()
-    print(d)
+    #print(vis)
+    #print()
+    #print(e)
+    #print()
+    #print(d)
 
-def BuscaLargura(g, v, vis, e, d):#slide 57
+def BuscaLargura(v, vis, e, d):#slide 57
     f = []#fila
 
     vis[v] = True
@@ -270,11 +270,12 @@ def BuscaLargura(g, v, vis, e, d):#slide 57
                         d[j][2] = True
                         vis[w] = True
                         f.append(w)
+        tam_f = len(f)
 
-def DeterminarDistancias(g, v, vis, e, d):#slide 62
+def DeterminarDistancias(v, vis, e, d):#slide 62
     f = []#fila
 
-    dist = [[] for i in range(len(g))]
+    dist = [[] for i in range(len(vis))]
     vis[v] = True
     f.append((v, 1))
 
@@ -295,3 +296,4 @@ def DeterminarDistancias(g, v, vis, e, d):#slide 62
                         vis[w] = True
                         dist[w] = niv
                         f.append((w, niv + 1))
+        tam_f = len(f)
