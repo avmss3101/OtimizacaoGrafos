@@ -43,25 +43,25 @@ def RemVertice(g, numV):
     #O certo seria: V = {1,3}, E = {}
     #Mas nessa representacao ficaria: V = {1,2}, E = {}
     #Pois acredito que adicionar -1 na linha e colunca da matriz para manter o numero do indice representando o vertice real seria errado...
-    g = numpy.delete(g, (numV - 1), axis = 0)
-    g = numpy.delete(g, (numV - 1), axis = 1)
+    g = numpy.delete(g, (numV), axis = 0)#(numV - 1)
+    g = numpy.delete(g, (numV), axis = 1)#(numV - 1)
     return g
 
 def AddAresta(g, v1, v2):
-    g[v1 - 1][v2 - 1] = 1
-    g[v2 - 1][v1 - 1] = 1
+    g[v1][v2] = 1#-1
+    g[v2][v1] = 1#-1
     return g
 
 def RemAresta(g, v1, v2):
-    g[v1 - 1][v2 - 1] = 0
-    g[v2 - 1][v1 - 1] = 0
+    g[v1][v2] = 0#-1
+    g[v2][v1] = 0#-1
     return g
 
 def VerticesVizinhos(g, v):
     vertices = []
     #y = 0
     for x in range(len(g)):
-        if g[v-1][x] == 1:
-            vertices.append(x + 1)
+        if g[v][x] == 1:#g[v-1][x]
+            vertices.append(x)#(x + 1)
             #y = y + 1
     return vertices
