@@ -64,13 +64,7 @@ def ProximoViz(g, v, w):#funcao auxiliar para slide 26
 def BuscaProfundidade(g, v, vis, e, d):#slide 26, mesma estrutura do buscas_l porem as funcoes auxiliares sao mudadas
     p = []
     priv = -1#inicia como -1, pois se nao tiver primeiroviz ficara com tal valor ja que na minha implementacao 0 pode ser vertice
-    #vis, e, d = busca_rot(g)
-    
-    #print('vis')
-    #print(vis)
     vis[v] = True
-    #print('vis')
-    #print(vis)
     priv = PrimeiroViz(g, v)
     
     #empilha
@@ -82,15 +76,13 @@ def BuscaProfundidade(g, v, vis, e, d):#slide 26, mesma estrutura do buscas_l po
         w = p.pop()
         v = p.pop()
         if (w > -1):
-            #print('vis')
-            #print(vis)
             p.append(v)
             p.append(ProximoViz(g, v, w))
-            if (vis[w]):#errado, eh o w
+            if (vis[w]):
                     for j in range(len(e)):
                         if ((e[j][0] == v and e[j][1] == w and not e[j][2]) or (e[j][1] == v and e[j][0] == w and not e[j][2])):
                             e[j][2] = True
-            else:#if (vis[w] == False):
+            else:
                     for j in range(len(e)):
                         if ((e[j][0] == v and e[j][1] == w and not e[j][2]) or (e[j][1] == v and e[j][0] == w and not e[j][2])):
                             e[j][2] = True
@@ -99,14 +91,6 @@ def BuscaProfundidade(g, v, vis, e, d):#slide 26, mesma estrutura do buscas_l po
                             p.append(w)
                             p.append(PrimeiroViz(g, w))
         tam_p = len(p)
-    #print('BuscaProfundidade')
-    #print('Grafo')
-    #print(g)
-    #print(vis)
-    #print()
-    #print(e)
-    #print()
-    #print(d)
 
 #slide 27, BUSCA_PROFUNDIDADE_R eh igual para ambos
 #slide 57, BUSCA_LARGURA eh igual para ambos

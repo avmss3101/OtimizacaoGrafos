@@ -28,12 +28,6 @@ def CriarGrafo():#gera arquivos txt no formato json
             f.write(s)
 
 def main():
-    #g = lista_adja.LerGrafoMontar("1000")
-    #st_m = time.clock()
-    #g = lista_adja.RemAresta(g, 333, 70)
-    #et_m = time.clock()
-    #print('tempo fora: ', et_m-st_m)
-
     #CriarGrafo()
     grafos12 = [5,6,7,8,9,10,20,50,100,200,500,1000]
     for ww in range(12):
@@ -42,7 +36,7 @@ def main():
         gm = matriz_adja.LerGrafoMontar(gr)
         gl = lista_adja.LerGrafoMontar(gr)
 
-        v, e, d = buscas_m.busca_rot(gm)
+        v, e, d = buscas_m.busca_rot(gm)#qualquer um dos dois serve
         #v, e, d = buscas_l.busca_rot(gl)
 
         #atribuindo peso as arestas
@@ -50,8 +44,10 @@ def main():
         #print(ew)
 
         st_l = time.clock()
-        for i in range(1):
-            ###d, p = cam_min.Dijkstra_m(gm, ew, 0)
+        for i in range(1):#1000
+            ###qtd_arestas = lista_adja.QtdArestas(gl)
+            ###print('Qtd Arestas: ', qtd_arestas)
+            #d, p = cam_min.Dijkstra_m(gm, ew, 0)
             #d, p = cam_min.Dijkstra_l(gl, ew, 0)
             #buscas_l.DeterminarDistancias(0, v, e, d)
             #buscas_l.BuscaLargura(0, v, e, d)
@@ -73,7 +69,7 @@ def main():
             #g = lista_adja.VerticesVizinhos(gl, 2)
             #g = matriz_adja.RemAresta(gm, 3, 2)
             #g = lista_adja.RemAresta(gl, 3, 2)
-            #g = matriz_adja.AddAresta(gm, 1, 2)
+            g = matriz_adja.AddAresta(gm, 1, 2)
             #g = lista_adja.AddAresta(gl, 1, 2)
             #g = matriz_adja.RemVertice(gm, 3)
             #g = lista_adja.RemVertice(gl, 3)
